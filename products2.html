@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Products 2</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=DM+Sans:wght@400;500&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: #faf7f2; color: #2c2c2c; padding: 2rem; }
+    h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1.5rem; color: #1a1a1a; }
+
+    button {
+      background: #2c2c2c; color: #fff; border: none;
+      padding: 0.75rem 2rem; font-size: 1rem; font-family: 'DM Sans', sans-serif;
+      cursor: pointer; border-radius: 4px; margin-bottom: 2rem;
+      transition: background 0.2s;
+    }
+    button:hover { background: #555; }
+
+    #result { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+
+    .product-card {
+      background: #fff; border-radius: 10px; padding: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+    .product-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.4rem; }
+    .product-desc { color: #666; font-size: 0.9rem; margin-bottom: 0.75rem; line-height: 1.5; }
+    .product-price { font-size: 1.1rem; font-weight: 600; color: #2c2c2c; margin-bottom: 0.5rem; }
+    .categories { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .category-tag {
+      background: #f0ebe3; color: #5a4a3a; font-size: 0.75rem;
+      padding: 0.25rem 0.6rem; border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Product Catalog</h1>
+  <button onclick="loadProducts()">Load Products</button>
+  <div id="result"></div>
+
+  <script>
+    function loadProducts() {
+      $.get("products.json", function(data) {
+        var products = typeof data === "string" ? JSON.parse(data) : data;
+        var html = "";
+        products.forEach(function(p) {
+          var tags = p.categories.map(c => `<span class="category-tag">${c}</span>`).join("");
+          html += `
+            <div class="product-card">
+              <div class="product-name">${p.name}</div>
+              <div class="product-desc">${p.description}</div>
+              <div class="product-price">$${p.price}</div>
+              <div class="categories">${tags}</div>
+            </div>`;
+        });
+        document.getElementById("result").innerHTML = html;
+      });
+    }
+  </script>
+</body>
+</html>
