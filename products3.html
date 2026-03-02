@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Products 3 - Filter</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=DM+Sans:wght@400;500&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: #faf7f2; color: #2c2c2c; padding: 2rem; }
+    h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1.5rem; }
+
+    .controls { display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; }
+
+    select {
+      padding: 0.7rem 1rem; font-size: 1rem; font-family: 'DM Sans', sans-serif;
+      border: 2px solid #2c2c2c; border-radius: 4px; background: #fff;
+      cursor: pointer; min-width: 180px;
+    }
+    button {
+      background: #2c2c2c; color: #fff; border: none;
+      padding: 0.75rem 2rem; font-size: 1rem; font-family: 'DM Sans', sans-serif;
+      cursor: pointer; border-radius: 4px; transition: background 0.2s;
+    }
+    button:hover { background: #555; }
+
+    #result { display: flex; flex-direction: column; gap: 0.75rem; }
+    .filtered-item {
+      background: #fff; padding: 1rem 1.5rem; border-radius: 8px;
+      font-family: 'Playfair Display', serif; font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-left: 4px solid #2c2c2c;
+    }
+  </style>
+</head>
+<body>
+  <h1>Filter Products</h1>
+  <div class="controls">
+    <select id="categorySelect"><option value="">Loading...</option></select>
+    <button onclick="filterProducts()">Filter</button>
+  </div>
+  <div id="result"></div>
+
+  <script>
+    var allProducts = [];
+
+    // Load JSON on page load to populate the dropdown
+    $(document).ready(function() {
+      $.get("products.json", function(data) {
+        allProducts = typeof data === "string" ? JSON.parse(data) : data;
+
+        // Collect all unique categories from the data
+        var categories = [];
+        allProducts.forEach(function(p) {
+          p.categories.forEach(function(c) {
+            if (!categories.includes(c)) categories.push(c);
+          });
+        });
+        categories.sort();
+
+        var select = document.getElementById("categorySelect");
+        select.innerHTML = categories.map(c => `<option value="${c}">${c}</option>`).join("");
+      });
+    });
+
+    function filterProducts() {
+      var selected = document.getElementById("categorySelect").value;
+      var matches = allProducts.filter(p => p.categories.includes(selected));
+      var html = matches.length
+        ? matches.map(p => `<div class="filtered-item">${p.name}</div>`).join("")
+        : "<p>No products found for that category.</p>";
+      document.getElementById("result").innerHTML = html;
+    }
+  </script>
+</body>
+</html>
