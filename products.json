@@ -1,0 +1,12 @@
+[
+  { "name": "Vintage T-Shirt", "description": "Tie-dye Grateful Dead T-shirt from the 70s tour.", "price": 35, "categories": ["clothing", "vintage"] },
+  { "name": "Mechanical Keyboard", "description": "Tactile clicky 75% layout keyboard with RGB lighting.", "price": 120, "categories": ["electronics", "accessories"] },
+  { "name": "Leather Journal", "description": "Hand-stitched genuine leather journal with 200 blank pages.", "price": 28, "categories": ["stationery", "vintage"] },
+  { "name": "Succulent Trio", "description": "Three assorted mini succulents in terracotta pots.", "price": 18, "categories": ["plants", "home decor"] },
+  { "name": "Noise-Cancelling Headphones", "description": "Over-ear wireless headphones with 30-hour battery life.", "price": 199, "categories": ["electronics", "accessories"] },
+  { "name": "Denim Jacket", "description": "Classic oversized denim jacket with distressed detailing.", "price": 65, "categories": ["clothing", "vintage"] },
+  { "name": "Ceramic Mug Set", "description": "Set of 4 hand-thrown ceramic mugs in earthy tones.", "price": 48, "categories": ["kitchen", "home decor"] },
+  { "name": "Yoga Mat", "description": "Non-slip eco-friendly cork yoga mat, 6mm thick.", "price": 55, "categories": ["fitness", "accessories"] },
+  { "name": "Polaroid Camera", "description": "Instant film camera with auto-exposure and selfie mirror.", "price": 89, "categories": ["electronics", "vintage"] },
+  { "name": "Scented Candle", "description": "Soy wax candle in cedarwood and amber fragrance, 50hr burn.", "price": 22, "categories": ["home decor", "wellness"] }
+]
